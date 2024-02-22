@@ -1,0 +1,46 @@
+services:
+  weston:
+    volumes:
+    - type: bind
+      target: /tmp
+      source: /tmp
+    - type: bind
+      target: /dev
+      source: /dev
+    - type: bind
+      target: /run/udev
+      source: /run/udev
+    device_cgroup_rules:
+    - c 4:0 rmw
+    - c 4:1 rmw
+    - c 4:7 rmw
+    - c 13:* rmw
+    - c 199:* rmw
+    - c 226:* rmw
+    network_mode: host
+    image: torizon/weston-vivante:3
+    environment:
+    - ACCEPT_FSL_EULA=1
+    cap_add:
+    - CAP_SYS_TTY_CONFIG
+  qt-image-display:
+    volumes:
+    - type: bind
+      target: /tmp
+      source: /tmp
+    - type: bind
+      target: /dev
+      source: /dev
+    - type: bind
+      target: /appdata
+      source: /home/torizon/
+    device_cgroup_rules:
+    - c 4:0 rmw
+    - c 4:7 rmw
+    - c 13:* rmw
+    - c 199:* rmw
+    - c 226:* rmw
+    image: drewmoseley/qt-image-display:qtimagedisplay
+    depends_on:
+    - weston
+version: "3.9"

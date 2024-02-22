@@ -1,0 +1,6 @@
+[
+    {
+        "source": "QtImageDisplay.pro",
+        "target": "$projectName.pro"
+    }
+]
