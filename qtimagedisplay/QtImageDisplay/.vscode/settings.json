@@ -1,0 +1,23 @@
+{
+  "torizon_psswd": "mysecretpassword",
+  "torizon_login": "torizon",
+  "torizon_ip": "verdin-imx8mm.lab.moseleynet.net",
+  "host_ip": "192.168.17.41",
+  "torizon_workspace": "${workspaceFolder}",
+  "torizon_debug_port": "",
+  "torizon_debug_ssh_port": "2231",
+  "torizon_debug_port2": "2232",
+  "torizon_debug_port3": "2233",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "torizon_gpu": "-vivante",
+  "torizon_arch": "aarch64",
+  "wait_sync": "1",
+  "torizon_run_as": "torizon",
+  "torizon_app_root": "/home/torizon",
+  "tcb.packageName": "QtImageDisplay",
+  "tcb.version": "early-access",
+  "docker_registry": "drewmoseley",
+  "docker_tag": "qtimagedisplay",
+  "tcb.clientId": "api-v2_581ff855_51b9a304-4621-421e-a93b-bf3b062e4ea1",
+  "tcb.clientSecret": "secret"
+}
