@@ -4,6 +4,13 @@
 # using remoteproc
 #
 
+firmware_sanity_check() {
+    # Implement a sanity check here to deal with rollback.
+    # This is going to be dependent on what the uC firmware
+    # is actually doing.  This is just a placeholder for now.
+    return 0
+}
+
 case "$1" in
     get-firmware-info)
         # Perform normal processing for this action.
@@ -19,8 +26,18 @@ case "$1" in
         echo stop > /sys/class/remoteproc/remoteproc0/state || true
         echo firmware.elf > /sys/class/remoteproc/remoteproc0/firmware
         echo start > /sys/class/remoteproc/remoteproc0/state
-        echo '{"status": "ok", "message": "New firmware installed"}'
-        exit 0 
+        if firmware_sanity_check; then
+            echo '{"status": "ok", "message": "New firmware installed"}'
+            exit 0
+        else
+            # Rollback
+            cp /var/cortex-firmware/firmware.elf.rollback /var/cortex-firmware/firmware.elf
+            echo stop > /sys/class/remoteproc/remoteproc0/state || true
+            echo firmware.elf > /sys/class/remoteproc/remoteproc0/firmware
+            echo start > /sys/class/remoteproc/remoteproc0/state
+            echo '{"status": "failed", "message": "Firmware rolled back"}'
+            exit 65
+        fi
         ;;
     complete-install)
         # Perform normal processing for this action.
